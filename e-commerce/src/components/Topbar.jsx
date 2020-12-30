@@ -24,7 +24,7 @@ export default class Topbar extends Component {
                       alt=""
                     ></img>
                   </div>
-                  <a href="#">this@this.com</a>
+                  <a href="#">support@lululemon.com</a>
                 </div>
                 <div className="top_bar_content ml-auto">
                   <div className="top_bar_user">

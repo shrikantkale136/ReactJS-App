@@ -30,6 +30,13 @@ ul {
     margin-bottom: 0px
 }
 
+.brand-name{
+    font-size: 25px;
+    font-weight: 600;
+    color: #d31334;
+    margin-left: 10px;
+    vertical-align: middle;
+}
 p {
     font-family: 'Rubik', sans-serif;
     font-size: 14px;

@@ -118,18 +118,15 @@ function TableView() {
   const columns = [
     {
       dataField: "any",
-      formatter: (cell, row, rowIndex) => (
-        <div>
-          <span>{rowIndex+1}</span>
-          <br />
-        </div>
-      ),
-      text: "#"
+      formatter: (cell, row, rowIndex) => (<div>{rowIndex+1}</div>),
+      text: "#",
+      headerStyle: (colum, colIndex) => {return {width: '80px'}}
     },
     {
       dataField: "id",
       text: "ID",
       sort: true,
+      headerStyle: (colum, colIndex) => {return {width: '80px'}}
     },
     {
       dataField: "keyValue",
@@ -170,9 +167,9 @@ function TableView() {
   }, []);
 
   if (error) {
-    return <div>No Data Found !! </div>;
+    return <div className="text-center">No Data Found !! </div>;
   } else if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <div className="text-center">Loading...</div>;
   } else {
     return (
       <div className="App">

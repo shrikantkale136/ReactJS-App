@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Table, Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Moment from "moment";
+import "bootstrap/dist/css/bootstrap.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import BootstrapTable from "react-bootstrap-table-next";
+
 function TableView() {
+  function dateFormat(cell, row) {
+    return <span>{Moment(cell).format("YYYY-MM-DD h:mm:ss A")} </span>;
+  }
+
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -107,6 +115,45 @@ function TableView() {
       ],
     },
   ];
+  const columns = [
+    {
+      dataField: "any",
+      formatter: (cell, row, rowIndex) => (
+        <div>
+          <span>{rowIndex+1}</span>
+          <br />
+        </div>
+      ),
+      text: "#"
+    },
+    {
+      dataField: "id",
+      text: "ID",
+      sort: true,
+    },
+    {
+      dataField: "keyValue",
+      text: "Key Value",
+      sort: true,
+    },
+    {
+      dataField: "userId",
+      text: "UserId",
+      sort: true,
+    },
+    {
+      dataField: "createdDttm",
+      text: "Created Datetime",
+      sort: true,
+      formatter: dateFormat,
+    },
+    {
+      dataField: "modifiedDttm",
+      text: "Modified Datetime",
+      sort: true,
+      formatter: dateFormat,
+    },
+  ];
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((res) => res.json())
@@ -130,73 +177,54 @@ function TableView() {
     return (
       <div className="App">
         <Container>
-          <Container>
+          <Row>
+            <Col md={{ span: 2, offset: 10 }}>
+              <div className="float-right">
+                <a href="#">Add new lookup</a>
+              </div>
+            </Col>
+          </Row>
+          <div className="filter-section">
             <Row>
-              <Col md={{ span: 2, offset: 10 }}>
-                <div className="float-right">
-                  <a href="#">Add new lookup</a>
+              <Col>
+                <ul className="filter-list">
+                  <li>
+                    <strong>Region: </strong> USA
+                  </li>
+                  <li>
+                    <strong>Facility:</strong> -
+                  </li>
+                </ul>
+              </Col>
+              <Col>
+                <ul className="filter-list">
+                  <li>
+                    <strong>Lookup Name: </strong> Reason code
+                  </li>
+                  <li>
+                    <strong>Lookup Description:</strong> Reason code
+                  </li>
+                </ul>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={{ span: 1, offset: 11 }}>
+                <div className="">
+                  <a href="#">Edit</a>
                 </div>
               </Col>
             </Row>
-            <div className="filter-section">
-              <Row>
-                <Col>
-                  <ul className="filter-list">
-                    <li>
-                      <strong>Region: </strong> USA
-                    </li>
-                    <li>
-                      <strong>Facility:</strong> -
-                    </li>
-                  </ul>
-                </Col>
-                <Col>
-                  <ul className="filter-list">
-                    <li>
-                      <strong>Lookup Name: </strong> Reason code
-                    </li>
-                    <li>
-                      <strong>Lookup Description:</strong> Reason code
-                    </li>
-                  </ul>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={{ span: 1, offset: 11 }}>
-                  <div className="">
-                    <a href="#">Edit</a>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </Container>
+          </div>
+          <BootstrapTable
+            bootstrap4
+            striped
+            bordered
+            hover
+            keyField="id"
+            data={items}
+            columns={columns}
+          />
         </Container>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
-              <th>Username</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.keyValue}</td>
-                <td>{item.userId}</td>
-                <td>
-                  {Moment(item.createdDttm).format("YYYY-MM-DD h:mm:ss A")}
-                </td>
-                <td>
-                  {Moment(item.modifiedDttm).format("YYYY-MM-DD h:mm:ss A")}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
       </div>
     );
   }

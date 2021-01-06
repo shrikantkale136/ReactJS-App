@@ -1458,11 +1458,12 @@ body#LoginForm {
   text-decoration: none;
 }
 
-Table thead tr th {
+Table thead tr th,
+Table tbody tr td {
   text-align: center !important;
 }
 .filter-section {
-  margin: 0 15px 15px ;
+  margin-bottom: 15px;
   padding: 5px;
   border: 1px solid rgb(199, 199, 199);
   border-radius: 5px;
@@ -1472,4 +1473,10 @@ Table thead tr th {
 }
 .float_right{
     text-align: right;
+}
+.page-header{
+  margin-top: 15px;
+  text-align: center;
+  font-size: 32px;
+  color: #d31334
 }

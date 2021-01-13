@@ -1483,3 +1483,6 @@ Table tbody tr td {
   text-shadow: 0px 3px 3px grey;
   font-weight: 500;
 }
+.pagination{
+  float: right;
+}

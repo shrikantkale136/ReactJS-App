@@ -4,12 +4,19 @@ import Moment from "moment";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
+import cellEditFactory from 'react-bootstrap-table2-editor';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 
 function TableView() {
   function dateFormat(cell, row) {
     return <span>{Moment(cell).format("YYYY-MM-DD h:mm:ss A")} </span>;
   }
-
+  const options = {
+    pageStartIndex: 1,
+    sizePerPage: 6,
+    hideSizePerPage: false,
+    hidePageListOnlyOnePage: true
+  };
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -120,35 +127,41 @@ function TableView() {
       dataField: "any",
       formatter: (cell, row, rowIndex) => (<div>{rowIndex+1}</div>),
       text: "#",
-      headerStyle: (colum, colIndex) => {return {width: '80px'}}
+      headerStyle: (colum, colIndex) => {return {width: '80px'}},
+      editable: false
     },
     {
       dataField: "id",
       text: "ID",
       sort: true,
-      headerStyle: (colum, colIndex) => {return {width: '80px'}}
+      headerStyle: (colum, colIndex) => {return {width: '80px'}},
+      editable: false
     },
     {
       dataField: "keyValue",
       text: "Key Value",
       sort: true,
+      editable: true
     },
     {
       dataField: "userId",
       text: "UserId",
       sort: true,
+      editable: false
     },
     {
       dataField: "createdDttm",
       text: "Created Datetime",
       sort: true,
       formatter: dateFormat,
+      editable: false
     },
     {
       dataField: "modifiedDttm",
       text: "Modified Datetime",
       sort: true,
       formatter: dateFormat,
+      editable: false
     },
   ];
   useEffect(() => {
@@ -220,6 +233,8 @@ function TableView() {
             keyField="id"
             data={items}
             columns={columns}
+            pagination={ paginationFactory(options) }
+            cellEdit={ cellEditFactory({ mode: 'dbclick',blurToSave: true }) }
           />
         </Container>
       </div>

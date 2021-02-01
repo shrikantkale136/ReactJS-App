@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form
+} from "react-bootstrap";
 import Moment from "moment";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
@@ -211,12 +216,16 @@ function TableView() {
                       <label for="staticEmail" class="col-sm-4 col-form-label">
                         <strong>Region: </strong>{" "}
                       </label>
-                      <div class="col-sm-8 pt-2">
-                        <DropdownButton id="dropdown-item-button" variant="secondary" title="Select Region">
-                          <Dropdown.Item as="button">Action</Dropdown.Item>
-                          <Dropdown.Item as="button">Another action</Dropdown.Item>
-                          <Dropdown.Item as="button">Something else</Dropdown.Item>
-                        </DropdownButton>
+                      <div class="col-sm-4 pt-2">
+                        <Form>
+                          <Form.Group controlId="exampleForm.SelectCustom">
+                            <Form.Control as="select" custom>
+                              <option>USA</option>
+                              <option>IND</option>
+                              <option>CANADA</option>
+                            </Form.Control>
+                          </Form.Group>
+                        </Form>
                       </div>
                     </div>
                   </li>

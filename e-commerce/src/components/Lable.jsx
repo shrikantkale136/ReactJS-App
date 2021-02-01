@@ -30,7 +30,7 @@ export default class Label extends React.Component {
 render() {
     const { ...otherAttributes } = this.props;
     return(
-      <p ref={(ref) => {this.nodeSelect = ref} }
+      <p className="p-2" ref={(ref) => {this.nodeSelect = ref} }
             onInput={this.emitChange} 
             onBlur={this.emitChange}
             contentEditable

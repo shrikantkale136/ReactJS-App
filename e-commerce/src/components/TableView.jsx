@@ -234,7 +234,7 @@ function TableView() {
                       <label for="staticEmail" class="col-sm-4 col-form-label">
                         <strong>Facility: </strong>{" "}
                       </label>
-                      <div class="col-sm-8 pt-2">
+                      <div class="col-sm-5">
                         <Lable html={regionName}></Lable>
                       </div>
                     </div>
@@ -248,7 +248,7 @@ function TableView() {
                       <label for="staticEmail" class="col-sm-4 col-form-label">
                         <strong>Lookup Name: </strong>{" "}
                       </label>
-                      <div class="col-sm-8 pt-2">
+                      <div class="col-sm-5">
                         <Lable html={regionName}></Lable>
                       </div>
                     </div>
@@ -258,7 +258,7 @@ function TableView() {
                       <label for="staticEmail" class="col-sm-4 col-form-label">
                         <strong>Lookup Description: </strong>{" "}
                       </label>
-                      <div class="col-sm-8 pt-2">
+                      <div class="col-sm-5">
                         <Lable html={regionName}></Lable>
                       </div>
                     </div>

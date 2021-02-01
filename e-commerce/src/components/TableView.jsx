@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import Moment from "moment";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
-import cellEditFactory from 'react-bootstrap-table2-editor';
-import paginationFactory from 'react-bootstrap-table2-paginator';
+import cellEditFactory from "react-bootstrap-table2-editor";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import Lable from "./Lable";
 
 function TableView() {
   function dateFormat(cell, row) {
     return <span>{Moment(cell).format("YYYY-MM-DD h:mm:ss A")} </span>;
   }
+
   const options = {
     pageStartIndex: 1,
     sizePerPage: 6,
@@ -125,43 +127,47 @@ function TableView() {
   const columns = [
     {
       dataField: "any",
-      formatter: (cell, row, rowIndex) => (<div>{rowIndex+1}</div>),
+      formatter: (cell, row, rowIndex) => <div>{rowIndex + 1}</div>,
       text: "#",
-      headerStyle: (colum, colIndex) => {return {width: '80px'}},
-      editable: false
+      headerStyle: (colum, colIndex) => {
+        return { width: "80px" };
+      },
+      editable: false,
     },
     {
       dataField: "id",
       text: "ID",
       sort: true,
-      headerStyle: (colum, colIndex) => {return {width: '80px'}},
-      editable: false
+      headerStyle: (colum, colIndex) => {
+        return { width: "80px" };
+      },
+      editable: false,
     },
     {
       dataField: "keyValue",
       text: "Key Value",
       sort: true,
-      editable: true
+      editable: true,
     },
     {
       dataField: "userId",
       text: "UserId",
       sort: true,
-      editable: false
+      editable: false,
     },
     {
       dataField: "createdDttm",
       text: "Created Datetime",
       sort: true,
       formatter: dateFormat,
-      editable: false
+      editable: false,
     },
     {
       dataField: "modifiedDttm",
       text: "Modified Datetime",
       sort: true,
       formatter: dateFormat,
-      editable: false
+      editable: false,
     },
   ];
   useEffect(() => {
@@ -178,6 +184,8 @@ function TableView() {
         }
       );
   }, []);
+
+  const [regionName, reasonCode] = useState("Region Name");
 
   if (error) {
     return <div className="text-center">No Data Found !! </div>;
@@ -198,22 +206,57 @@ function TableView() {
             <Row>
               <Col>
                 <ul className="filter-list">
-                  <li>
-                    <strong>Region: </strong> USA
+                  <li class="height55">
+                    <div class="form-group row">
+                      <label for="staticEmail" class="col-sm-4 col-form-label">
+                        <strong>Region: </strong>{" "}
+                      </label>
+                      <div class="col-sm-8 pt-2">
+                        <DropdownButton id="dropdown-item-button" variant="secondary" title="Select Region">
+                          <Dropdown.Item as="button">Action</Dropdown.Item>
+                          <Dropdown.Item as="button">Another action</Dropdown.Item>
+                          <Dropdown.Item as="button">Something else</Dropdown.Item>
+                        </DropdownButton>
+                      </div>
+                    </div>
                   </li>
-                  <li>
-                    <strong>Facility:</strong> -
+                  <li class="height55">
+                    <div class="form-group row">
+                      <label for="staticEmail" class="col-sm-4 col-form-label">
+                        <strong>Facility: </strong>{" "}
+                      </label>
+                      <div class="col-sm-8 pt-2">
+                        <Lable html={regionName}></Lable>
+                      </div>
+                    </div>
                   </li>
                 </ul>
               </Col>
               <Col>
                 <ul className="filter-list">
-                  <li>
-                    <strong>Lookup Name: </strong> Reason code
+                  <li class="height55">
+                    <div class="form-group row">
+                      <label for="staticEmail" class="col-sm-4 col-form-label">
+                        <strong>Lookup Name: </strong>{" "}
+                      </label>
+                      <div class="col-sm-8 pt-2">
+                        <Lable html={regionName}></Lable>
+                      </div>
+                    </div>
                   </li>
-                  <li>
+                  <li class="height55">
+                    <div class="form-group row">
+                      <label for="staticEmail" class="col-sm-4 col-form-label">
+                        <strong>Lookup Description: </strong>{" "}
+                      </label>
+                      <div class="col-sm-8 pt-2">
+                        <Lable html={regionName}></Lable>
+                      </div>
+                    </div>
+                  </li>
+                  {/* <li>
                     <strong>Lookup Description:</strong> Reason code
-                  </li>
+                  </li> */}
                 </ul>
               </Col>
             </Row>
@@ -233,8 +276,8 @@ function TableView() {
             keyField="id"
             data={items}
             columns={columns}
-            pagination={ paginationFactory(options) }
-            cellEdit={ cellEditFactory({ mode: 'dbclick',blurToSave: true }) }
+            pagination={paginationFactory(options)}
+            cellEdit={cellEditFactory({ mode: "dbclick", blurToSave: true })}
           />
         </Container>
       </div>
